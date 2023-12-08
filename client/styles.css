@@ -1,0 +1,15 @@
+
+html {
+    background-color: darkseagreen;
+}
+
+img {
+    width: 863px;
+}
+
+#button {
+    display: flex;
+    flex: row;
+    align-items: left;
+    gap: 630px;
+}
