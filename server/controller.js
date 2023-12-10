@@ -1,8 +1,7 @@
-let goals = []
-globalID = 1
+let cards = []
+let globalID = 1
 
 module.exports = {
-
     getCompliment: (req, res) => {
         const compliments = ["Gee, you're a smart cookie!", "Cool shirt!", "Your Javascript skills are stellar."];
 
@@ -21,10 +20,36 @@ module.exports = {
 
         res.status(200).send(randomFortune);
     },
-    createGoal: (req, res) =>{
-        req.body.id = globalID
-        goals.push(req.body)
+    getCards: (req, res) => {
+        res.status(200).send(cards)
+    },
+    deleteCard: (req, res) => {
+        let index = cards.findIndex(elem => elem.id === +req.params.id)
+        cards.splice(index, 1)
+        res.status(200).send(cards)
+    },
+    createCard: (req, res) => {
+        const {imageURL} = req.body
+
+        let newCard = {
+            id: globalID,
+            imageURL
+        }
+        cards.push(newCard)
         globalID++
-        res.status(200).send(goals)
+        res.status(200).send(cards)
     }
+    // updateMovie: (req, res) => {
+    //     const {type} = req.body
+    //     let index = movies.findIndex(elem => elem.id === +req.params.id)
+    //     if(type === 'minus' && movies[index].rating > 1){
+    //         movies[index].rating -= 1
+    //         res.status(200).send(movies)
+    //     } else if(type === 'plus' && movies[index].rating < 5){
+    //         movies[index].rating += 1
+    //         res.status(200).send(movies)
+    //     } else {
+    //         res.status(400).send('Invalid star rating!')
+    //     }
+    // }
 }

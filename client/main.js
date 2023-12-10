@@ -1,19 +1,12 @@
 const complimentBtn = document.getElementById("complimentButton")
 const fortuneBtn = document.querySelector('#fortuneButton')
-const specific = document.querySelector('#specific')
-const measurable = document.querySelector('#measurable')
-const attainable = document.querySelector('#attainable')
-const relevant = document.querySelector('#relevant')
-const timeBound = document.querySelector('#time-bound')
-const form = document.querySelector('#smart-container')
+const cardContainer = document.querySelector('#card-container')
+const form = document.querySelector('form')
 
-globalBox = 1
+const cardURL = `http://localhost:4000/api/cards`
 
-const goalBox = () => {
-    let newForm = document.createElement('#smart-container' + globalBox)
-    let newEdit = document.createElement('button')
-    let newDelete = document.createElement('button')
-}
+const cardsCollage = ({ data: cards }) => displayCards(cards)
+const errDisplay = err => console.log(err.response.data)
 
 const getCompliment = () => {
     axios
@@ -36,42 +29,51 @@ const getFortune = () => {
     .catch((err) =>{
         console.error(err)
     })
-}
+};
 
-const createGoal = (goal) =>{
-    goalBox()
-    h4.textContent = `${goal.name} (${goal.category})`
-    // h4.addEventListener('click', () => deleteGoal(goal))
-    container.appendChild(h4)
-}
+const getAllCards = () => axios.get(cardURL).then(cardsCollage).catch(errDisplay)
+const createCard = body => axios.post(cardURL, body).then(cardsCollage).catch(errDisplay)
+const deleteCard = id => axios.delete(`${cardURL}/${id}`).then(cardsCollage).catch(errDisplay)
+// const editQuote = (id, type) => axios.put(`${cardURL}/${id}`, {type}).then(cardsCollage).catch(errDisplay)
 
-const handleSubmit = (event) =>{
-    event.preventDefault()
-    const body = {
-        specific: specific.value,
-        measurable: measurable.value,
-        attainable: attainable.value,
-        relevant: relevant.value,
-        time-bound: timeBound.value
+function submitHandler(e) {
+    e.preventDefault()
+
+    // let quote = document.querySelector('#quote')
+    let imageURL = document.querySelector('#img')
+
+    let bodyObj = {
+        // quote: quote.value,
+        imageURL: imageURL.value
     }
-    axios
-        .post('http://localhost:4000/api/goals', body)
-        .then((res) =>{
-            // // container.innerHTML = ''
-            // console.log(res.data)
-            // res.data.forEach(createGoal)
-        })
-        .catch((err) => {
-            console.error(err);
-        })
+
+    createCard(bodyObj)
+
+    // quote.value = ''
+    imageURL.value = ''
 }
 
+function cardPresentation(card) {
+    const cardDiv = document.createElement('div')
+    cardDiv.classList.add('envelope')
 
+    cardDiv.innerHTML = `<img alt='Majestic scenery' src=${card.imageURL} class="postcard"/>
+    <button onclick="deleteCard(${card.id})">Remove Inspiration</button>
+    `
 
+    cardContainer.appendChild(cardDiv)
+}
 
-
+function displayCards(arr) {
+    cardContainer.innerHTML = ``
+    for (let i = 0; i < arr.length; i++) {
+        cardPresentation(arr[i])
+    }
+}
 
 
 complimentBtn.addEventListener('click', getCompliment)
 fortuneBtn.addEventListener('click', getFortune)
-form.addEventListener('submit', handleSubmit)
+form.addEventListener('submit', submitHandler)
+
+getAllCards()
