@@ -34,13 +34,22 @@ form {
     margin: 30px;
 }
 
-#produce {
+#input-container {
+    display: flex;
+    justify-content: space-between;
+}
+
+button {
     background-color: #ef6969;
-    width: 75px;
-    height: 25px;
+    width: 100px;
+    height: 35px;
     color: blanchedalmond;
     border: bold;
     margin: 0px;
+}
+
+#inspired-message-box {
+    position: relative;
 }
 
 input {

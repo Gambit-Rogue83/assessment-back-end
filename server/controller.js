@@ -41,7 +41,7 @@ module.exports = {
     }
     // editQuote: (req, res) => {
     //     const {type} = req.body
-    //  
+
     //     }
     // }
 }

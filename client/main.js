@@ -58,7 +58,7 @@ function cardPresentation(card) {
 
     cardDiv.innerHTML = `<img alt='Majestic scenery' src=${card.imageURL} class="postcard"/>
     <button onclick="deleteCard(${card.id})">Remove Inspiration</button>
-    <button onclick="editQuote">Edit Quote!</button>`
+    `
     cardQuote.innerHTML = inspiration
     cardContainer.appendChild(cardDiv)
     cardContainer.appendChild(cardQuote)
