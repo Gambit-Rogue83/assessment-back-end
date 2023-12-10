@@ -16,7 +16,7 @@ app.get('/api/fortune', getFortune)
 app.get('/api/cards', getCards)
 app.delete('/api/cards/:id', deleteCard)
 app.post('/api/cards', createCard)
-// app.put('/api/cards/:id', updateMovie)
+// app.put('/api/cards/:id', editQuote)
 
 
 ////LISTEN   ////

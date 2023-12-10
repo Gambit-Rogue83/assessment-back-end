@@ -80,3 +80,8 @@ input {
     position: sticky;
     bottom: 0;
 }
+
+.poetry {
+    color: aquamarine;
+    width: 120px;
+}

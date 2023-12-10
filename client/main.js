@@ -34,34 +34,34 @@ const getFortune = () => {
 const getAllCards = () => axios.get(cardURL).then(cardsCollage).catch(errDisplay)
 const createCard = body => axios.post(cardURL, body).then(cardsCollage).catch(errDisplay)
 const deleteCard = id => axios.delete(`${cardURL}/${id}`).then(cardsCollage).catch(errDisplay)
-// const editQuote = (id, type) => axios.put(`${cardURL}/${id}`, {type}).then(cardsCollage).catch(errDisplay)
+const editQuote = (id, type) => axios.put(`${cardURL}/${id}`, {type}).then(cardsCollage).catch(errDisplay)
 
 function submitHandler(e) {
     e.preventDefault()
 
-    // let quote = document.querySelector('#quote')
     let imageURL = document.querySelector('#img')
 
     let bodyObj = {
-        // quote: quote.value,
         imageURL: imageURL.value
     }
 
     createCard(bodyObj)
-
-    // quote.value = ''
     imageURL.value = ''
 }
+let inspiration = "What lies behind you and what lies in front of you, pales in comparison to what lies inside of you."
 
 function cardPresentation(card) {
     const cardDiv = document.createElement('div')
+    const cardQuote = document.createElement('p')
     cardDiv.classList.add('envelope')
+    cardQuote.classList.add('poetry')
 
     cardDiv.innerHTML = `<img alt='Majestic scenery' src=${card.imageURL} class="postcard"/>
     <button onclick="deleteCard(${card.id})">Remove Inspiration</button>
-    `
-
+    <button onclick="editQuote">Edit Quote!</button>`
+    cardQuote.innerHTML = inspiration
     cardContainer.appendChild(cardDiv)
+    cardContainer.appendChild(cardQuote)
 }
 
 function displayCards(arr) {
