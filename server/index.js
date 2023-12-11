@@ -7,7 +7,7 @@ app.use(cors());
 app.use(express.json());
 
 /// DESTRUCTURE FUNCTION FROM CONTROLLER
-const { getCompliment, getFortune, getCards, deleteCard, createCard, editQuote } = require('./controller')
+const { getCompliment, getFortune, getCards, deleteCard, createCard } = require('./controller')
 
 
 ////ENDPOINTS   /////
@@ -16,7 +16,7 @@ app.get('/api/fortune', getFortune)
 app.get('/api/cards', getCards)
 app.delete('/api/cards/:id', deleteCard)
 app.post('/api/cards', createCard)
-app.put('/api/cards/:id', editQuote)
+// app.put('/api/cards/:id', editQuote)
 
 
 ////LISTEN   ////

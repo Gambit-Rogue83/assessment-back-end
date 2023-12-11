@@ -39,9 +39,9 @@ module.exports = {
         globalID++
         res.status(200).send(cards)
     }
-    editQuote: (req, res) => {
-        const {type} = req.body
-        cardQuote.innerHTML = type
-        res.status(200).send(cards)
-        }
+    // editQuote: (req, res) => {
+    //     const {type} = req.body
+    //     cardQuote.innerHTML = type
+    //     res.status(200).send(cards)
+    //     }
     }

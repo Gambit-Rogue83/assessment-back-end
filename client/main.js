@@ -1,7 +1,8 @@
 const complimentBtn = document.getElementById("complimentButton")
 const fortuneBtn = document.querySelector('#fortuneButton')
 const cardContainer = document.querySelector('#card-container')
-const form = document.querySelector('form')
+const form = document.querySelector('#motivational-image-box')
+const inspire = document.querySelector('#inspired-message-box')
 
 const cardURL = `http://localhost:4000/api/cards`
 
@@ -34,7 +35,7 @@ const getFortune = () => {
 const getAllCards = () => axios.get(cardURL).then(cardsCollage).catch(errDisplay)
 const createCard = body => axios.post(cardURL, body).then(cardsCollage).catch(errDisplay)
 const deleteCard = id => axios.delete(`${cardURL}/${id}`).then(cardsCollage).catch(errDisplay)
-const editQuote = (id, type) => axios.put(`${cardURL}/${id}`, {type}).then(cardsCollage).catch(errDisplay)
+// const editQuote = (id, type) => axios.put(`${cardURL}/${id}`, {type}).then(cardsCollage).catch(errDisplay)
 
 function submitHandler(e) {
     e.preventDefault()
@@ -75,5 +76,6 @@ function displayCards(arr) {
 complimentBtn.addEventListener('click', getCompliment)
 fortuneBtn.addEventListener('click', getFortune)
 form.addEventListener('submit', submitHandler)
+// inspire.addEventListener('submit', editQuote)
 
 getAllCards()
